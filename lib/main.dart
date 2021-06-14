@@ -61,6 +61,21 @@ class ItemContainer extends StatelessWidget {
   }
 }
 
+class Item extends StatelessWidget {
+  Items();
+
+  final bool leftAligned;
+  final Srting imgUrl;
+  final 
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: null,
+    );
+  }
+}
+
 class FirstHalf extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
