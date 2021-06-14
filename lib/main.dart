@@ -284,6 +284,8 @@ class FirstHalf extends StatelessWidget {
 }
 
 class CustomAppBar extends StatelessWidget {
+  final CartListBloc bloc = BlocProvider.getBloc<CartListBloc>();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -292,14 +294,21 @@ class CustomAppBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Icon(Icons.menu),
-          Container(
-            margin: EdgeInsets.only(right: 30),
-            child: Text("0"),
-            padding: EdgeInsets.all(15),
-            decoration: BoxDecoration(
-                color: Colors.yellow[800],
-                borderRadius: BorderRadius.circular(50)),
+          StreamBuilder(
+            stream: bloc.listStream,
+            builder: (context, snapshot) => {
+              List<FoodItem> foodItems = snapshot.data;
+              int length = foodItems != null ? foodItems.length : 0;
+            },
           )
+          // Container(
+          //   margin: EdgeInsets.only(right: 30),
+          //   child: Text("0"),
+          //   padding: EdgeInsets.all(15),
+          //   decoration: BoxDecoration(
+          //       color: Colors.yellow[800],
+          //       borderRadius: BorderRadius.circular(50)),
+          // )
         ],
       ),
     );
