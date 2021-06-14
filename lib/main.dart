@@ -47,13 +47,26 @@ class Home extends StatelessWidget {
 class ItemContainer extends StatelessWidget {
   final FoodItem foodItem;
 
-  const ItemContainer({required this.foodItem});
+  ItemContainer({required this.foodItem});
+
+  final CartListBloc bloc = BlocProvider.getBloc<CartListBloc>();
+
+  addToCart(FoodItem foodItem) {
+    bloc.addToList(foodItem);
+  }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        addToCart(foodItem)
+        addToCart(foodItem);
+
+        final snackbar = SnackBar(
+          content: Text("${foodItem.title} added to the cart"),
+          duration: Duration(milliseconds: 550),
+        );
+
+        Scaffold.of(context).showSnackBar(snackbar);
       },
       child: Items(
           hotel: foodItem.hotel,
